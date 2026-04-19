@@ -1,0 +1,8 @@
+#display{
+    width: 500px;
+    height: 100px;
+    background-color: lightgrey;
+    border:2px black solid;
+    text-align: end;
+    font-size: 5rem;
+}
