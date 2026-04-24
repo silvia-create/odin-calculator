@@ -63,6 +63,20 @@ operatorContainer.appendChild(equalOperator);
 operatorContainer.appendChild(clear);
 btns.appendChild(operatorContainer);
 
+const backspace = document.createElement('button');
+backspace.textContent = '←';
+btns.appendChild(backspace);
+backspace.addEventListener("click",(e) => {
+  if(firstNum.length !== 0 && secondNum.length === 0){
+      firstNum = firstNum.slice(0,-1);
+      display.textContent = firstNum;
+    }
+    if(secondNum.length !== 0){
+      secondNum = secondNum.slice(0,-1);
+      display.textContent = secondNum;
+    }
+})
+
 let hasOperatorBeenPressed = false;
 operatorContainer.addEventListener("click",(e) => {
   hasOperatorBeenPressed = true;
