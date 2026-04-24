@@ -62,3 +62,70 @@ operatorContainer.appendChild(divideOperator);
 operatorContainer.appendChild(equalOperator);
 operatorContainer.appendChild(clear);
 btns.appendChild(operatorContainer);
+
+let hasOperatorBeenPressed = false;
+operatorContainer.addEventListener("click",(e) => {
+  hasOperatorBeenPressed = true;
+  dotCount = 0;
+  dot.disabled = false;
+  if(e.target.textContent === 'clear'){
+    firstNum = '';
+    secondNum = '';
+    result = '';
+    display.textContent = '';
+    hasOperatorBeenPressed = false;
+  };
+  
+  if(firstNum.length !== 0 && secondNum.length === 0){
+    operator = e.target.textContent;
+    console.log('operator is '+ operator);
+  }
+  
+  if(firstNum.length !== 0 && secondNum.length !== 0){
+    if('+-*/='.includes(e.target.textContent)){
+      if(operator === '/' && secondNum === '0'){
+        result = 'nice try';
+      }else{
+        const rawResult = operate(operator,+firstNum,+secondNum);
+        result = (+rawResult.toFixed(10)).toString();
+      }
+      display.textContent = result;
+      console.log('result = '+ result);
+      operator = e.target.textContent;
+      console.log('new operator is '+ operator);
+      firstNum = result;
+      secondNum = '';
+      console.log('new firstNum = '+firstNum);
+      console.log('new secondNum = '+secondNum);
+    }
+    
+  }
+})
+
+numContainer.addEventListener("click",(e) => {  
+  if(e.target.textContent === '.'){
+    dotCount++;    
+  }
+  if(dotCount >= 1) {
+    dot.disabled = true;
+  }
+  if(result.length !== 0){
+    if(operator === '='){
+      firstNum = '';
+      secondNum = '';
+      result = '';
+      display.textContent = '';
+      hasOperatorBeenPressed = false;      
+    }
+  }
+  
+  if(hasOperatorBeenPressed === false){
+    firstNum += e.target.textContent;
+    display.textContent = firstNum;
+    console.log('firstNum =' + firstNum);
+  }else if(hasOperatorBeenPressed === true){
+    secondNum += e.target.textContent;
+    display.textContent = secondNum;
+    console.log('secondNum ='+ secondNum);
+  }
+})
