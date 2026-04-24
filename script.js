@@ -143,3 +143,22 @@ numContainer.addEventListener("click",(e) => {
     console.log('secondNum ='+ secondNum);
   }
 })
+
+window.addEventListener('keydown', function(e) {
+  const numbers = document.querySelectorAll('.number');
+  for(let number of numbers){
+    const numText = number.innerText;       
+    if (e.key === numText){
+      number.click();
+    }
+  } 
+  if(e.key === '.') dot.click();
+  if(e.shiftKey === true && e.key === '+') addOperator.click();
+  if(e.key === '-') subtractOperator.click();
+  if(e.shiftKey === true && e.key === '*') multiplyOperator.click();
+  if(e.key === '/') divideOperator.click();
+  if(e.key === '=' || e.key === 'Enter') equalOperator.click();
+  if(e.key === 'Escape') clear.click();
+  if(e.key === 'Backspace') backspace.click();
+  
+})
