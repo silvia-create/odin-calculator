@@ -1,45 +1,48 @@
-const add = function(a,b){
-    return a+b;
-}
-const subtract = function(a,b){
-    return a-b;
-}
-const multiply = function(a,b){
-    return a*b;
-}
-const divide = function(a,b){
-    return a/b;
-}
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
-const firstNum = 0;
-const secondNum = 0;
-const operator = null;
+let firstNum = '';
+let secondNum = '';
+let operator = '';
+let result = '';
+let dotCount = 0;
 
 const operate = function(operator,num1,num2){
     switch(operator){
         case "+": 
-            add(num1,num2);
+            return add(num1,num2);
             break;
         case "-": 
-            subtract(num1,num2);
+            return subtract(num1,num2);
             break;
         case "*": 
-            multiply(num1,num2);
+            return multiply(num1,num2);
             break;
         case "/": 
-            divide(num1,num2);
+            return divide(num1,num2);
             break;
     }
 }
 
-const container = document.getElementById('container');
+const display = document.getElementById('display');
+const btns = document.getElementById('btns');
 
+const numContainer = document.createElement('div');
 for(i = 0; i <= 9; i++){
     const num = document.createElement('button');
     num.textContent = i;
-    container.appendChild(num);
+    num.id = 'i';
+    num.classList.add('number');
+    numContainer.appendChild(num);
 }
+const dot = document.createElement('button');
+dot.textContent = '.';
+numContainer.appendChild(dot);
+btns.appendChild(numContainer);
 
+const operatorContainer = document.createElement('div');
 const addOperator = document.createElement('button');
 addOperator.textContent = '+';
 const subtractOperator = document.createElement('button');
@@ -52,9 +55,10 @@ const equalOperator = document.createElement('button');
 equalOperator.textContent = '=';
 const clear = document.createElement('button');
 clear.textContent = 'clear';
-container.appendChild(addOperator);
-container.appendChild(subtractOperator);
-container.appendChild(multiplyOperator);
-container.appendChild(divideOperator);
-container.appendChild(equalOperator);
-container.appendChild(clear);
+operatorContainer.appendChild(addOperator);
+operatorContainer.appendChild(subtractOperator);
+operatorContainer.appendChild(multiplyOperator);
+operatorContainer.appendChild(divideOperator);
+operatorContainer.appendChild(equalOperator);
+operatorContainer.appendChild(clear);
+btns.appendChild(operatorContainer);
