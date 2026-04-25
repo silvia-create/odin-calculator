@@ -6,3 +6,16 @@
     text-align: end;
     font-size: 5rem;
 }
+#btns{
+    border:2px black solid;
+    display: flex;
+    width: 500px;
+}
+/* how to make layout like3*4? */
+.num-container{
+    flex: 2;
+    display: flex;
+}
+.operator-container{
+    flex: 1;
+}

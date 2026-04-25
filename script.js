@@ -29,43 +29,30 @@ const operate = function(operator,num1,num2){
 const display = document.getElementById('display');
 const btns = document.getElementById('btns');
 
-const numContainer = document.createElement('div');
-for(i = 0; i <= 9; i++){
-    const num = document.createElement('button');
-    num.textContent = i;
-    num.id = 'i';
-    num.classList.add('number');
-    numContainer.appendChild(num);
-}
-const dot = document.createElement('button');
-dot.textContent = '.';
-numContainer.appendChild(dot);
-btns.appendChild(numContainer);
+const numContainer = document.getElementById('num-container');
+const dot = document.getElementById('.');
 
-const operatorContainer = document.createElement('div');
-const addOperator = document.createElement('button');
-addOperator.textContent = '+';
-const subtractOperator = document.createElement('button');
-subtractOperator.textContent = '-';
-const multiplyOperator = document.createElement('button');
-multiplyOperator.textContent = '*';
-const divideOperator = document.createElement('button');
-divideOperator.textContent = '/';
-const equalOperator = document.createElement('button');
-equalOperator.textContent = '=';
-const clear = document.createElement('button');
-clear.textContent = 'clear';
-operatorContainer.appendChild(addOperator);
-operatorContainer.appendChild(subtractOperator);
-operatorContainer.appendChild(multiplyOperator);
-operatorContainer.appendChild(divideOperator);
-operatorContainer.appendChild(equalOperator);
-operatorContainer.appendChild(clear);
-btns.appendChild(operatorContainer);
+const num0 = document.getElementById('0');
+const num1 = document.getElementById('1');
+const num2 = document.getElementById('2');
+const num3 = document.getElementById('3');
+const num4 = document.getElementById('4');
+const num5 = document.getElementById('5');
+const num6 = document.getElementById('6');
+const num7 = document.getElementById('7');
+const num8 = document.getElementById('8');
+const num9 = document.getElementById('9');
 
-const backspace = document.createElement('button');
-backspace.textContent = '←';
-btns.appendChild(backspace);
+const operatorContainer = document.getElementById('operator-container');
+const addOperator = document.getElementById('+');
+const subtractOperator = document.getElementById('-');
+const multiplyOperator = document.getElementById('*');
+const divideOperator = document.getElementById('/');
+const equalOperator = document.getElementById('=');
+const clear = document.getElementById('clear');
+
+const backspace = document.getElementById('backspace');
+
 backspace.addEventListener("click",(e) => {
   if(firstNum.length !== 0 && secondNum.length === 0){
       firstNum = firstNum.slice(0,-1);
