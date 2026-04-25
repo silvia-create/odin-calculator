@@ -9,13 +9,14 @@
 #btns{
     border:2px black solid;
     display: flex;
-    width: 500px;
+    /* width: 500px; */
 }
 /* how to make layout like3*4? */
-.num-container{
-    flex: 2;
+#num-container{
+    /* flex: 2; */
     display: flex;
+    flex-direction: column;
 }
-.operator-container{
-    flex: 1;
+#operator-container{
+    /* flex: 1; */
 }

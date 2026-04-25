@@ -7,6 +7,7 @@ let firstNum = '';
 let secondNum = '';
 let operator = '';
 let result = '';
+let hasOperatorBeenPressed = false;
 let dotCount = 0;
 
 const operate = function(operator,num1,num2){
@@ -31,7 +32,6 @@ const btns = document.getElementById('btns');
 
 const numContainer = document.getElementById('num-container');
 const dot = document.getElementById('.');
-
 const num0 = document.getElementById('0');
 const num1 = document.getElementById('1');
 const num2 = document.getElementById('2');
@@ -49,66 +49,14 @@ const subtractOperator = document.getElementById('-');
 const multiplyOperator = document.getElementById('*');
 const divideOperator = document.getElementById('/');
 const equalOperator = document.getElementById('=');
+
 const clear = document.getElementById('clear');
-
 const backspace = document.getElementById('backspace');
-
-backspace.addEventListener("click",(e) => {
-  if(firstNum.length !== 0 && secondNum.length === 0){
-      firstNum = firstNum.slice(0,-1);
-      display.textContent = firstNum;
-    }
-    if(secondNum.length !== 0){
-      secondNum = secondNum.slice(0,-1);
-      display.textContent = secondNum;
-    }
-})
-
-let hasOperatorBeenPressed = false;
-operatorContainer.addEventListener("click",(e) => {
-  hasOperatorBeenPressed = true;
-  dotCount = 0;
-  dot.disabled = false;
-  if(e.target.textContent === 'clear'){
-    firstNum = '';
-    secondNum = '';
-    result = '';
-    display.textContent = '';
-    hasOperatorBeenPressed = false;
-  };
-  
-  if(firstNum.length !== 0 && secondNum.length === 0){
-    operator = e.target.textContent;
-    console.log('operator is '+ operator);
-  }
-  
-  if(firstNum.length !== 0 && secondNum.length !== 0){
-    if('+-*/='.includes(e.target.textContent)){
-      if(operator === '/' && secondNum === '0'){
-        result = 'nice try';
-      }else{
-        const rawResult = operate(operator,+firstNum,+secondNum);
-        result = (+rawResult.toFixed(10)).toString();
-      }
-      display.textContent = result;
-      console.log('result = '+ result);
-      operator = e.target.textContent;
-      console.log('new operator is '+ operator);
-      firstNum = result;
-      secondNum = '';
-      console.log('new firstNum = '+firstNum);
-      console.log('new secondNum = '+secondNum);
-    }
-    
-  }
-})
 
 numContainer.addEventListener("click",(e) => {  
   if(e.target.textContent === '.'){
-    dotCount++;    
-  }
-  if(dotCount >= 1) {
-    dot.disabled = true;
+    dotCount++;  
+    if(dotCount >= 1) dot.disabled = true; 
   }
   if(result.length !== 0){
     if(operator === '='){
@@ -129,6 +77,61 @@ numContainer.addEventListener("click",(e) => {
     display.textContent = secondNum;
     console.log('secondNum ='+ secondNum);
   }
+})
+
+operatorContainer.addEventListener("click",(e) => {
+  hasOperatorBeenPressed = true;
+  dotCount = 0;
+  dot.disabled = false;
+  
+  if(firstNum.length !== 0 && secondNum.length === 0){
+    operator = e.target.textContent;
+    console.log('operator is '+ operator);
+  }
+  
+  if(firstNum.length !== 0 && secondNum.length !== 0){
+    if(operator === '/' && secondNum === '0'){
+      result = 'nice try';
+    }else{
+      const rawResult = operate(operator,+firstNum,+secondNum);
+      result = (+rawResult.toFixed(10)).toString();
+    }
+    display.textContent = result;
+    console.log('result = '+ result);
+    operator = e.target.textContent;
+    console.log('new operator is '+ operator);
+    firstNum = result;
+    secondNum = '';
+    console.log('new firstNum = '+firstNum);
+    console.log('new secondNum = '+secondNum);
+  }
+})
+
+backspace.addEventListener("click",(e) => {
+  if(firstNum.length !== 0 && secondNum.length === 0){
+    if(firstNum.slice(-1) === '.'){
+      dotCount = 0;
+      dot.disabled = false;
+    }
+    firstNum = firstNum.slice(0,-1);
+    display.textContent = firstNum;
+  }
+  if(secondNum.length !== 0){
+    if(secondNum.slice(-1) === '.'){
+      dotCount = 0;
+      dot.disabled = false;
+    }
+    secondNum = secondNum.slice(0,-1);
+    display.textContent = secondNum;
+  }
+})
+
+clear.addEventListener("click",(e) => {
+  firstNum = '';
+  secondNum = '';
+  result = '';
+  display.textContent = '';
+  hasOperatorBeenPressed = false;
 })
 
 window.addEventListener('keydown', function(e) {
